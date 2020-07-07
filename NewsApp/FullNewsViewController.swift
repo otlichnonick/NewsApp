@@ -10,24 +10,36 @@ import UIKit
 
 class FullNewsViewController: UIViewController {
     
+    @IBOutlet weak var imageNews: UIImageView!
+    @IBOutlet weak var titleNews: UILabel!
+    @IBOutlet weak var descriptionNews: UILabel!
     
     var itemOfNews: ItemOfNews?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.titleNews.text = itemOfNews?.title
+        self.descriptionNews.text = itemOfNews?.description
+        
+        if itemOfNews?.image != "" {
+            getImage(urlToImage: itemOfNews!.image)
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // загрузка картинки в фоне
+    func getImage(urlToImage: String) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let url = URL(string: urlToImage)
+            let data = NSData(contentsOf: url! as URL)
+            let image = UIImage(data: data! as Foundation.Data)
+            DispatchQueue.main.async {
+                self.imageNews.image = image
+                UIView.animate(withDuration: 1, animations: {
+                    self.imageNews.alpha = 1
+                })
+            }
+        }
     }
-    */
 
 }
