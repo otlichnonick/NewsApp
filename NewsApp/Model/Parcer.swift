@@ -17,12 +17,13 @@ class Parcer: NSObject {
     private var currentDescription = ""
     private var currentCategory = "" {
         didSet {
+            currentCategory = currentCategory.trimmingCharacters(in: .whitespacesAndNewlines)
             if currentCategory != "" {
                 categories.insert(currentCategory)
             }
         }
     }
-    private var currentPubData = ""
+    private var currentPubData = "" 
     
     //инициализируем парсер
     func initParcer(_ url: String) -> Parcer {
