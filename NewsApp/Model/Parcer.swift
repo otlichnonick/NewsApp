@@ -25,7 +25,6 @@ class Parcer: NSObject {
     }
     private var currentPubData = "" 
     
-    //инициализируем парсер
     func initParcer(_ url: String) -> Parcer {
         parseNews(url: url)
         return self

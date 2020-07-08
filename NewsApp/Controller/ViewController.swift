@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // обновляем данные
     func refreshData() {
         Data.downloadData(completion: { [unowned self] in
             self.reloadTableView()
@@ -49,11 +50,13 @@ class ViewController: UIViewController {
         })
     }
     
+    // анимируем обновление данных
     func reloadTableView() {
         self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         Data.isDownloading = false
     }
     
+    // создаем действие для кнопки "Фильтр"
     @IBAction func filtered(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Раздел: \n\(Data.filtered)", message: nil, preferredStyle: .alert)
         
@@ -86,6 +89,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
+    // указываем количество строк
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let filteredNews = Data.filteredItemOfNews else {
             return 0
@@ -93,6 +97,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return filteredNews.count
     }
     
+    // создаем строку
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell") as! NewsCell
         
@@ -102,6 +107,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // переходим на 2й экран при нажатии на строку
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "FullNewsViewController") as! FullNewsViewController
