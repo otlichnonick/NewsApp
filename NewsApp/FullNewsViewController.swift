@@ -35,9 +35,6 @@ class FullNewsViewController: UIViewController {
             let image = UIImage(data: data! as Foundation.Data)
             DispatchQueue.main.async {
                 self.imageNews.image = image
-                UIView.animate(withDuration: 1, animations: {
-                    self.imageNews.alpha = 1
-                })
             }
         }
     }

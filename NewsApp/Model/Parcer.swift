@@ -55,7 +55,7 @@ extension Parcer: XMLParserDelegate {
             currentPubData = ""
             currentCategory = ""
             currentDescription = ""
-        } else if currentElement == "enclouser" {
+        } else if currentElement == "enclosure" {
             if let urlString = attributeDict["url"] {
                 currentImage = urlString
             }
